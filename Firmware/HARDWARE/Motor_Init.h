@@ -1,8 +1,9 @@
 #ifndef __MOTOR_INIT_H
 #define __MOTOR_INIT_H
 
-void Motor_Process(void);
-void Motor_Init(void);	//Initialize the motor
+void Motor_GPIO_Init(Motor_GPIO Motor_GPIO);	//Initialize the port
+void Pluse_Signal_Set(unsigned char Pluse_Mode, Motor_GPIO Motor_GPIO);		//control the pluse
+void Direction_Signal_Set(unsigned char Motor_Mode, Motor_GPIO Motor_GPIO); //Control the direction
 
 
 	//There different mode for motor movement
