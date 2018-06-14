@@ -2,9 +2,7 @@
 #include "Global_Variant.h"
 #include "stm32f4xx_gpio.h"
 #include "GPIO.h"
-#include "Indicating_Process.h"
 #include "delay.h"
-#include "UART_Process.h"
 
 
 void Bar_Front_Motor_Process(void)

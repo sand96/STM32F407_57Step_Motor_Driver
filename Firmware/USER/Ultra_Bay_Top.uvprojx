@@ -397,11 +397,6 @@
               <FilePath>.\Global_Variant.c</FilePath>
             </File>
             <File>
-              <FileName>GPIO.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\GPIO.c</FilePath>
-            </File>
-            <File>
               <FileName>Motor_Process.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Motor_Process.c</FilePath>

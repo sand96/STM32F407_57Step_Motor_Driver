@@ -40,5 +40,3 @@
 ..\obj\main.o: STM32F407VET_Config.h
 ..\obj\main.o: Global_Variant.h
 ..\obj\main.o: Motor_Process.h
-..\obj\main.o: Ultra_Bay.h
-..\obj\main.o: Ultra_Bay.h

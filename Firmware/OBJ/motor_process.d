@@ -38,3 +38,5 @@
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\motor_process.o: GPIO.h
+..\obj\motor_process.o: ..\SYSTEM\delay\delay.h
+..\obj\motor_process.o: ..\SYSTEM\sys\sys.h
