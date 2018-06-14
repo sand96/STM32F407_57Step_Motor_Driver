@@ -38,6 +38,6 @@
 ..\obj\ultra_bay.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 ..\obj\ultra_bay.o: Ultra_Bay.h
 ..\obj\ultra_bay.o: Motor_Process.h
-..\obj\ultra_bay.o: GPIO.h
+..\obj\ultra_bay.o: ..\HARDWARE\Motor_Init.h
 ..\obj\ultra_bay.o: ..\SYSTEM\delay\delay.h
 ..\obj\ultra_bay.o: ..\SYSTEM\sys\sys.h

@@ -155,61 +155,7 @@ void PendSV_Handler(void)
 
 void SysTick_Handler(void)
 {
-//	gul_delay_timer++; 
-//		if(delay_osrunning==1)					//OS开始跑了,才执行正常的调度处理
-//	{
-//		OSIntEnter();						//进入中断
-//		OSTimeTick();       				//调用ucos的时钟服务程序               //
-//		OSIntExit();       	 				//触发任务切换软中断
-//	}
- //   gul_jack_motor_timer ++;
-    gul_motor_timer_1 ++;
-    gul_solar_panel_1_timer ++;
-		gul_solar_panel_2_timer ++;
-	
-	if(delay_count_motor_flag == 2)
-	{
-		delay_count_motor_flag = 0;
-		if(delay_count_motor > 50)
-		{
-		delay_count_motor = delay_count_motor - 5;
-		}
-	}
-		 
 
-    if(gul_timer_counter_1 >= 5)
-    {
-        msTicks++;
-        // gul_motor_timer_1 ++;
-        gul_indicating_timer ++;
-        gul_timer_counter_1 = 0;
-        gul_button_press_timer ++;
-        gul_P4P_button_press_timer++;
-		gul_P4P_button_press_timer ++;
-		//gul_jack_motor_timer ++;        
-    }
-    else
-    {
-        gul_timer_counter_1 ++;
-    }
-   
-    if(gul_indicating_timer >= 1000)
-    {
-        gul_indicating_timer = 0;
-    }
-    else
-    {
-            
-    }
-    
-    if(gul_button_press_timer >= 3000)
-    {
-        gul_button_press_timer = 0;
-    }
-    else
-    {
-            
-    }	
 }
 
 

@@ -8,31 +8,63 @@
 			Input_Pin 		The control signal to control stm32
 	notes: 	The motor control here is DM542.
 */
-#include "stm32f4xx_gpio.h"
+
 #include "Motor_Init.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx.h"  
+
 void Motor_GPIO_Init(Motor_GPIO Motor_GPIO)
 {
 	GPIO_InitTypeDef Motor_GPIO_Struct;
 
 		//Initialize the clock for Motor_GPIO
-	switch(Motor_GPIO.Motor_Port) 
+	if(Motor_GPIO.Motor_Port == GPIOA) 
 	{
-		case GPIOA : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA)); break;
-		case GPIOB : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB)); break;
-		case GPIOC : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC)); break;
-		case GPIOD : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD)); break;
-		case GPIOE : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE)); break;
-		case GPIOF : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF)); break;
-		case GPIOG : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG)); break;
-		case GPIOH : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOH)); break;
-		case GPIOI : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOI)); break;
-		case GPIOJ : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOJ)); break;
-		case GPIOK : RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOK)); break;
-		default : break;			
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
 	}
-
+	else if(Motor_GPIO.Motor_Port == GPIOB)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOC)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC,ENABLE);
+	}	
+	else if(Motor_GPIO.Motor_Port == GPIOD)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOE)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOF)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF,ENABLE);
+	}	
+	else if(Motor_GPIO.Motor_Port == GPIOG)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOH)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOH,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOI)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOI,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOJ)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOJ,ENABLE);
+	}
+	else if(Motor_GPIO.Motor_Port == GPIOK)
+	{
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOK,ENABLE);
+	}
+		
 		//Initialize the output port 
-	Motor_GPIO_Struct.GPIO_Pin = Motor_GPIO.Direction_Pin | Motor_GPIO.Direction_Pin; //
+		Motor_GPIO_Struct.GPIO_Pin = Motor_GPIO.Direction_Pin | Motor_GPIO.Direction_Pin; //
     Motor_GPIO_Struct.GPIO_Mode = GPIO_Mode_OUT; //output mode 
     Motor_GPIO_Struct.GPIO_OType = GPIO_OType_PP;//push-pull output
     Motor_GPIO_Struct.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
@@ -48,7 +80,7 @@ void Motor_GPIO_Init(Motor_GPIO Motor_GPIO)
 
 /*	brief:	Set the Pluse signal here
 */
-void Pluse_Signal_Set(unsigned char Pluse_Mode, Motor_GPIO Motor_GPIO)
+void Pluse_Signal_Set(unsigned char Pluse_Mode,Motor_GPIO Motor_GPIO)
 {
 	if(Pluse_Mode == PLUSE_HIGH)//It Pluse is high 
 	{
@@ -64,7 +96,7 @@ void Pluse_Signal_Set(unsigned char Pluse_Mode, Motor_GPIO Motor_GPIO)
 	notes:  The direction mode is the same to Motor_Mode.
 			It's uncessary to define it again
 */
-void Direction_Signal_Set(unsigned char Motor_Mode, Motor_GPIO Motor_GPIO)
+void Direction_Signal_Set(unsigned char Motor_Mode,Motor_GPIO Motor_GPIO)
 {
 	if(Motor_Mode == MOTOR_FORWARD) //If you want to forward move the motor
 	{
@@ -75,5 +107,7 @@ void Direction_Signal_Set(unsigned char Motor_Mode, Motor_GPIO Motor_GPIO)
 		GPIO_WriteBit(GPIOE, GPIO_Pin_6,Bit_SET); 
 	}
 	else	//If stop, do nothing
-	{;}
+	{
+		;
+	}
 }

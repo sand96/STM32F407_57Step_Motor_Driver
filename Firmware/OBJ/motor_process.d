@@ -1,6 +1,4 @@
 ..\obj\motor_process.o: Motor_Process.c
-..\obj\motor_process.o: Motor_Process.h
-..\obj\motor_process.o: Global_Variant.h
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_gpio.h
 ..\obj\motor_process.o: ..\USER\stm32f4xx.h
 ..\obj\motor_process.o: ..\CORE\core_cm4.h
@@ -37,6 +35,5 @@
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\motor_process.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\obj\motor_process.o: GPIO.h
-..\obj\motor_process.o: ..\SYSTEM\delay\delay.h
-..\obj\motor_process.o: ..\SYSTEM\sys\sys.h
+..\obj\motor_process.o: Motor_Process.h
+..\obj\motor_process.o: ..\HARDWARE\Motor_Init.h

@@ -337,7 +337,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USER;..\FWLIB\inc</IncludePath>
+              <IncludePath>..\CORE;..\SYSTEM\delay;..\SYSTEM\sys;..\USER;..\FWLIB\inc;..\HARDWARE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -392,19 +392,9 @@
               <FilePath>.\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>Global_Variant.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Global_Variant.c</FilePath>
-            </File>
-            <File>
               <FileName>Motor_Process.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Motor_Process.c</FilePath>
-            </File>
-            <File>
-              <FileName>Ultra_Bay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Ultra_Bay.c</FilePath>
             </File>
             <File>
               <FileName>STM32F407VET_Config.c</FileName>
@@ -462,21 +452,6 @@
               <FilePath>..\FWLIB\src\stm32f4xx_syscfg.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FWLIB\src\stm32f4xx_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FWLIB\src\stm32f4xx_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_wwdg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\FWLIB\src\stm32f4xx_wwdg.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FWLIB\src\stm32f4xx_tim.c</FilePath>
@@ -490,6 +465,16 @@
               <FileName>readme.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\readme.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HARDWARE</GroupName>
+          <Files>
+            <File>
+              <FileName>Motor_Init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Motor_Init.c</FilePath>
             </File>
           </Files>
         </Group>

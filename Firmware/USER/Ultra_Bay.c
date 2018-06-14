@@ -41,13 +41,3 @@ void delay_ms(unsigned int x)
 }
 
 
-//The TIM2 interrupt sevice
-/* \brief Generating a time flag for Systick to manage delay 
-					used by motor drive pluse signal
-	\param
-	\notes
-*/
-void TIM2_IRQHandler(void)
-{
-	
-}
