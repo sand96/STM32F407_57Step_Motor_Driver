@@ -10,7 +10,7 @@ Motor Test_Motor;
     notes:  This is just a demo. Anyone wants to use it, you need to
             initilize the motor according to your requirement.
 */
-void Motor_Init(Motor Test_Motor)
+void Motor_Init(void)
 {
     /* This is demo
     Motor Test_Motor; //This is just a variable for test.
@@ -34,7 +34,7 @@ void Motor_Init(Motor Test_Motor)
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
     Test_Motor.Motor_Timer = 0; //This value can be 0 or 1. It doesen't matter 
-    Test_Motor.Timer_Delay = 5; //The bigger the delay is, the slower to increase the speed
+    Test_Motor.Timer_Delay = 2000; //The bigger the delay is, the slower to increase the speed
     Test_Motor.Timer_Delay_Count = 0;
 		
 
@@ -47,7 +47,7 @@ void Motor_Init(Motor Test_Motor)
     Motor_GPIO_Init(Test_Motor.Motor_GPIO);  
 }
 
-void  Motor_Process(Motor Motor)
+void  Motor_Process(Motor  Motor)
 {
    if( Motor.Motor_Mode == MOTOR_FORWARD )
     {
@@ -71,8 +71,7 @@ void  Motor_Process(Motor Motor)
         {
             Motor.Motor_Mode = MOTOR_STOP;
         }            
-     } 
- 
+     }  
         //If backward move
    else if( Motor.Motor_Mode == MOTOR_BACKWARD )
     {
@@ -172,8 +171,15 @@ void TIM3_IRQHandler(void)
         else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
         {
             Test_Motor.Timer_Delay_Count = 0;
+					if(Test_Motor.Timer_Delay > 20)
+					{
 						Test_Motor.Timer_Delay -= 1; //Shorten the interval between the acceleartion
-        }
+					}
+					else
+					{
+						Test_Motor.Timer_Delay = 20;
+					}
+        } 
     }
     TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //Reset TIM3 flag
 }

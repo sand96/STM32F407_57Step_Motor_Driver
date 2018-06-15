@@ -8,7 +8,7 @@
 
 extern Motor Test_Motor;
 
-void Motor_Init(Motor Motor);
+void Motor_Init(void);
 void Motor_Process(Motor Motor);
 void delay_ms(unsigned int x);
 #endif 

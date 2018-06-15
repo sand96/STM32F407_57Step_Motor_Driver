@@ -8,30 +8,23 @@
 #include "sys.h"
 #include "delay.h"
 
-extern Motor Test_Motor;
+//extern Motor Test_Motor;
+
 int main(void)
 {
 	  CPU_Initialization();
     delay_init(168);		  //???????//????
 	
-			//The Test Motor is needed to be set in the Motor_Process.c//
-		Motor_Init(Test_Motor); 
-		
-		Test_Motor.Motor_Mode = MOTOR_FORWARD;
-	
-	///Test
-	GPIO_InitTypeDef Motor_GPIO_Struct;
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
-		
-		//Initialize the output port 
-		Motor_GPIO_Struct.GPIO_Pin = GPIO_Pin_4; //
-    Motor_GPIO_Struct.GPIO_Mode = GPIO_Mode_OUT; //output mode 
-    Motor_GPIO_Struct.GPIO_OType = GPIO_OType_PP;//push-pull output
-    Motor_GPIO_Struct.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
-    Motor_GPIO_Struct.GPIO_PuPd = GPIO_PuPd_UP;//Enable pull up resistor
-    GPIO_Init(GPIOA, &Motor_GPIO_Struct);
-	
-	GPIO_WriteBit(GPIOA, GPIO_Pin_4,Bit_SET); 
+			//Here, you initialize the Test Motor
+			//The Test Motor is needed to be set in the Motor_Process.c
+			//However, you don't need to pass the value into the function call
+		Motor_Init(); 
+//		Test_Motor.Motor_Mode = MOTOR_FORWARD;
+		//	if(Test_Motor.Timer_Delay == 20)
+	//	{
+			Test_Motor.Motor_Mode = MOTOR_FORWARD;
+		//	Test_Motor.Timer_Delay = 2000;
+		//}
 	
 	while(1)
 	{

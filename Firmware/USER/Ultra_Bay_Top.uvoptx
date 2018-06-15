@@ -152,9 +152,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>38</LineNumber>
+          <LineNumber>31</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134220776</Address>
+          <Address>134220612</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,30 +163,67 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\main.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Ultra_Bay_Top\main.c\38</Expression>
+          <Expression>\\Ultra_Bay_Top\main.c\31</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>21</LineNumber>
+          <LineNumber>31</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134220716</Address>
+          <Address>134219014</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>.\main.c</Filename>
+          <Filename>.\Motor_Process.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Ultra_Bay_Top\main.c\21</Expression>
+          <Expression>\\Ultra_Bay_Top\Motor_Process.c\31</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>52</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134219084</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\Motor_Process.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Ultra_Bay_Top\Motor_Process.c\52</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>105</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134218488</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\HARDWARE\Motor_Init.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Ultra_Bay_Top\../HARDWARE/Motor_Init.c\105</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GPIOA</ItemText>
+          <ItemText>GPIOE</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Test_Motor</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
