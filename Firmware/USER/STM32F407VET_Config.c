@@ -10,7 +10,7 @@ void CPU_Initialization(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//Set priority groups
     NVIC_Configuration();
-	//	SysTick_Config(SystemCoreClock / 20000);
+		SysTick_Config(1680000);
 }
 
 

@@ -33,6 +33,7 @@ typedef struct
 
 	//Variable for mode information
 	unsigned char Motor_Mode; //It can be forward, backward and stop.
+	unsigned char Motor_Mode_Old; //Store the odd information of Motor_Mode, you need to refresh the Old_Mode manually
 	unsigned char Motor_Timer; //Motor timer control, in order to conrtrol the pluse precisely
 	unsigned long int Timer_Delay; //Control the Motor_Timer changing speed 
 	unsigned long int Timer_Delay_Count; //The counter to store Timer_Delay

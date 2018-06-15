@@ -5,6 +5,7 @@
 #include "Motor_Init.h"
 
 Motor Test_Motor;
+long int Test_flag_1_second;
 /*  brief:  This will initialze a motor including all the variabl 
             and port
     notes:  This is just a demo. Anyone wants to use it, you need to
@@ -33,8 +34,9 @@ void Motor_Init(void)
     Test_Motor.Motor_Position = 0;
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
-    Test_Motor.Motor_Timer = 0; //This value can be 0 or 1. It doesen't matter 
-    Test_Motor.Timer_Delay = 2000; //The bigger the delay is, the slower to increase the speed
+    Test_Motor.Motor_Mode_Old = MOTOR_STOP; //When initialzie, the old mode is also zero 
+		Test_Motor.Motor_Timer = 0; //This value can be 0 or 1. It doesen't matter 
+    Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
     Test_Motor.Timer_Delay_Count = 0;
 		
 
@@ -103,7 +105,55 @@ void  Motor_Process(Motor  Motor)
      }
         //If nothing happen
     else
-    {;} 
+    {
+			if( Motor.Motor_Mode_Old == MOTOR_FORWARD )
+    {
+        // Bar front Step Motor Direction is forward
+        Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);     
+        if( (Motor.Motor_Timer% 2) == 1 )                                         
+        {
+        // Bar front Step Motor Pulse ---- High Level
+         Pluse_Signal_Set(PLUSE_HIGH,Motor.Motor_GPIO);  		
+        }
+        else if( ( (Motor.Motor_Timer % 2) == 0) && ( (Motor.Motor_GPIO.Motor_Port->ODR & Test_Motor_Pluse ) == Test_Motor_Pluse ) )  
+        {
+            // Bar front Step Motor Pulse ---- Low Level
+             Pluse_Signal_Set(PLUSE_LOW,Motor.Motor_GPIO); 
+             Motor.Motor_Position++;
+        }
+        else
+        {;}	 
+
+        if((Motor.Motor_GPIO.Motor_Port->IDR&=Test_Motor_Input) == 0)        
+        {
+            Motor.Motor_Mode = MOTOR_STOP;
+        }            
+     }  
+        //If backward move
+   else if( Motor.Motor_Mode_Old == MOTOR_BACKWARD )
+    {
+         // Bar front Step Motor Direction is backward 
+        Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);
+        if( (Motor.Motor_Timer % 2) == 1 )                                       
+        {
+            Pluse_Signal_Set(PLUSE_HIGH,Motor.Motor_GPIO); 		
+        }
+        else if( ( (Motor.Motor_Timer % 2) == 0) && ((Motor.Motor_GPIO.Motor_Port->ODR & Test_Motor_Pluse ) == Test_Motor_Pluse ) )  
+        {
+            Pluse_Signal_Set(PLUSE_LOW,Motor.Motor_GPIO);        // Bar front Step Motor Pulse ---- Low Level
+            if(Motor.Motor_Position > 0 )
+            {
+                Motor.Motor_Position --;           
+            }
+            else
+            {
+                Motor.Motor_Position = 0;
+            }
+        }
+		}
+		else //Now, the speed is low, the motor can stop
+		{;}
+	}
 }
 
 /* brief:   TIM2 Timer, this will update Motor_Timer according to TIM2 timer
@@ -164,22 +214,45 @@ void TIM3_IRQHandler(void)
     {
             //The reason to double Timer Delay is avoid the TIM2 and TIM3
             //changing to their maxmium at the same time.
-        if(Test_Motor.Timer_Delay_Count < 2 * Test_Motor.Timer_Delay)
-        {
-            Test_Motor.Timer_Delay_Count ++;
-        }
-        else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
-        {
-            Test_Motor.Timer_Delay_Count = 0;
-					if(Test_Motor.Timer_Delay > 20)
+			if(Test_Motor.Motor_Mode != MOTOR_STOP)
+			{
+					if(Test_Motor.Timer_Delay_Count < 2 * Test_Motor.Timer_Delay)
 					{
-						Test_Motor.Timer_Delay -= 1; //Shorten the interval between the acceleartion
+							Test_Motor.Timer_Delay_Count ++;
 					}
-					else
+					else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
 					{
-						Test_Motor.Timer_Delay = 20;
+							Test_Motor.Timer_Delay_Count = 0;
+						if(Test_Motor.Timer_Delay > Test_Motor_Stop_Delay_MIN)
+						{
+							Test_Motor.Timer_Delay -= 1; //Shorten the interval between the acceleartion
+						}
+						else if(Test_Motor.Timer_Delay <= Test_Motor_Stop_Delay_MIN)
+						{
+							Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MIN;
+						}
+					} 
+			}
+			else 
+			{
+				if(Test_Motor.Timer_Delay_Count < 2 * Test_Motor.Timer_Delay)
+					{
+							Test_Motor.Timer_Delay_Count ++;
 					}
-        } 
+					else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
+					{
+						Test_Motor.Timer_Delay_Count = 0;
+						if(Test_Motor.Timer_Delay < Test_Motor_Stop_Delay_MAX)
+						{
+							Test_Motor.Timer_Delay += 1; //Increase the interval between the acceleartion
+						}
+						else if(Test_Motor.Timer_Delay >= Test_Motor_Stop_Delay_MAX)
+						{
+							Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX;
+							Test_Motor.Motor_Mode_Old = MOTOR_STOP;
+						}
+					}
+			}
     }
     TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //Reset TIM3 flag
 }

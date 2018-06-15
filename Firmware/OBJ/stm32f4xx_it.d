@@ -35,6 +35,7 @@
 ..\obj\stm32f4xx_it.o: ..\FWLIB\inc\stm32f4xx_dac.h
 ..\obj\stm32f4xx_it.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 ..\obj\stm32f4xx_it.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-..\obj\stm32f4xx_it.o: Global_Variant.h
 ..\obj\stm32f4xx_it.o: ..\SYSTEM\delay\delay.h
 ..\obj\stm32f4xx_it.o: ..\SYSTEM\sys\sys.h
+..\obj\stm32f4xx_it.o: Motor_Process.h
+..\obj\stm32f4xx_it.o: ..\HARDWARE\Motor_Init.h

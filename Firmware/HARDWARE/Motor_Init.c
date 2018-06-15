@@ -64,18 +64,23 @@ void Motor_GPIO_Init(Motor_GPIO Motor_GPIO)
 	}
 		
 		//Initialize the output port 
-		Motor_GPIO_Struct.GPIO_Pin = Motor_GPIO.Direction_Pin | Motor_GPIO.Direction_Pin; //
+		Motor_GPIO_Struct.GPIO_Pin = Motor_GPIO.Direction_Pin | Motor_GPIO.Pluse_Pin; //
     Motor_GPIO_Struct.GPIO_Mode = GPIO_Mode_OUT; //output mode 
     Motor_GPIO_Struct.GPIO_OType = GPIO_OType_PP;//push-pull output
     Motor_GPIO_Struct.GPIO_Speed = GPIO_Speed_100MHz;//100MHz
     Motor_GPIO_Struct.GPIO_PuPd = GPIO_PuPd_UP;//Enable pull up resistor
     GPIO_Init(Motor_GPIO.Motor_Port, &Motor_GPIO_Struct);
 
-    	//Initialzie the input pin 	    
+	//Test to observe whether the port can be set rightly
+//	GPIO_WriteBit(Motor_GPIO.Motor_Port, Motor_GPIO.Pluse_Pin,Bit_SET);
+//	GPIO_WriteBit(Motor_GPIO.Motor_Port, Motor_GPIO.Direction_Pin,Bit_SET);
+  
+	//Initialzie the input pin 	    
     Motor_GPIO_Struct.GPIO_Speed = GPIO_Speed_50MHz; //This isn't necessary
     Motor_GPIO_Struct.GPIO_Pin = Motor_GPIO.Control_Pin;
     Motor_GPIO_Struct.GPIO_Mode = GPIO_Mode_IN; //input mode
-    GPIO_Init(Motor_GPIO.Motor_Port, &Motor_GPIO_Struct);        
+    GPIO_Init(Motor_GPIO.Motor_Port, &Motor_GPIO_Struct); 
+		
 }
 
 /*	brief:	Set the Pluse signal here
@@ -100,11 +105,11 @@ void Direction_Signal_Set(unsigned char Motor_Mode,Motor_GPIO Motor_GPIO)
 {
 	if(Motor_Mode == MOTOR_FORWARD) //If you want to forward move the motor
 	{
-		GPIO_WriteBit(GPIOE, GPIO_Pin_6,Bit_RESET);	
+		GPIO_WriteBit(Motor_GPIO.Motor_Port, Motor_GPIO.Direction_Pin,Bit_RESET);	
 	}
 	else if(Motor_Mode == MOTOR_BACKWARD)
 	{
-		GPIO_WriteBit(GPIOE, GPIO_Pin_6,Bit_SET); 
+		GPIO_WriteBit(Motor_GPIO.Motor_Port, Motor_GPIO.Direction_Pin,Bit_SET); 
 	}
 	else	//If stop, do nothing
 	{
