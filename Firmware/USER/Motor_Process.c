@@ -155,10 +155,10 @@ void TIM2_IRQHandler(void)
     }
     TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //Reset TIM2 flag
 }
+
 /* brief:   This is module control the acceleration ratio of the motor
    notes；  The demo is totally same with the above demo 
 */
-
 void TIM3_IRQHandler(void)
 {
     if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //
@@ -169,13 +169,15 @@ void TIM3_IRQHandler(void)
         {
             Test_Motor.Timer_Delay_Count ++;
         }
-        else 
+        else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
         {
             Test_Motor.Timer_Delay_Count = 0;
+						Test_Motor.Timer_Delay -= 1; //Shorten the interval between the acceleartion
         }
     }
     TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //Reset TIM3 flag
 }
+
 /* \brief	microsecond level delay
 	 \param	int x, the input number, which will set the number 
 					of delay.
