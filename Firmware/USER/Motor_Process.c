@@ -193,14 +193,15 @@ void TIM2_IRQHandler(void)
     //Look the above the explanation carefully. 
     if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //
     {
-        if(Test_Motor.Timer_Delay_Count <= Test_Motor.Timer_Delay)
+    /*    if(Test_Motor.Timer_Delay_Count <= Test_Motor.Timer_Delay)
         {
             Test_Motor.Motor_Timer = 0;
         }
         else 
         {
             Test_Motor.Motor_Timer = 1;
-        }
+        } */
+			Test_Motor.Motor_Timer = ~Test_Motor.Motor_Timer;
     }
     TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //Reset TIM2 flag
 }

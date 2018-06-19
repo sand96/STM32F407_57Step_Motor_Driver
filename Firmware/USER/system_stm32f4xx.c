@@ -422,6 +422,7 @@ void SystemInit(void)
   #endif
   /* Reset the RCC clock configuration to the default reset state ------------*/
   /* Set HSION bit */
+	/*This register shows the whether all the clock source has been prepared*/
   RCC->CR |= (uint32_t)0x00000001;
 
   /* Reset CFGR register */

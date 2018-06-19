@@ -10,7 +10,7 @@ void CPU_Initialization(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//Set priority groups
     NVIC_Configuration();
-		SysTick_Config(1680000);
+	//	SysTick_Config(1680000);
 }
 
 
@@ -23,8 +23,8 @@ void  NVIC_Configuration(void)
 
 
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2,ENABLE);  //Enable the clock for TIM2
-  TIM_TimeBaseInitStructure.TIM_Period = 10-1; 	//The automatic reload value
-	TIM_TimeBaseInitStructure.TIM_Prescaler=(8);  //presclar of the TIM2
+  TIM_TimeBaseInitStructure.TIM_Period = 42000 - 1; 	//The automatic reload value
+	TIM_TimeBaseInitStructure.TIM_Prescaler=(2000);  //presclar of the TIM2
 	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //Using up count mode
 	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1; 
 	
@@ -41,9 +41,9 @@ void  NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 	
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);  //Enable the clock for TIM3
-  TIM_TimeBaseInitStructure.TIM_Period = 50-1; 	//The automatic reload value
-	TIM_TimeBaseInitStructure.TIM_Prescaler=(8);  //presclar of the TIM3
+	/*RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);  //Enable the clock for TIM3
+  TIM_TimeBaseInitStructure.TIM_Period = 2; 	//The automatic reload value
+	TIM_TimeBaseInitStructure.TIM_Prescaler=(1);  //presclar of the TIM3
 	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //Using up count mode
 	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1; 
 	
@@ -58,9 +58,7 @@ void  NVIC_Configuration(void)
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority=0x01; //PreemptionPriority
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority=0x0; //ChannelSubPriority
 	NVIC_InitStructure.NVIC_IRQChannelCmd=ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	NVIC_Init(&NVIC_InitStructure); */
 	
-    
-    
 }
 

@@ -3,11 +3,11 @@
 <title>Static Call Graph - [..\OBJ\Ultra_Bay_Top.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\Ultra_Bay_Top.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Fri Jun 15 16:26:25 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Jun 19 17:32:34 2018
 <BR><P>
-<H3>Maximum Stack Usage =         80 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         76 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; CPU_Initialization &rArr; NVIC_Configuration &rArr; NVIC_Init
+__rt_entry_main &rArr; main &rArr; Motor_Init &rArr; Motor_GPIO_Init &rArr; GPIO_Init
 <P>
 <H3>
 Functions with no stack information
@@ -124,8 +124,8 @@ Function Pointers
 Global Symbols
 </H3>
 <P><STRONG><a name="[60]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
-<BR><BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
-<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<BR><BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
 <P><STRONG><a name="[61]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
@@ -235,8 +235,8 @@ Global Symbols
 <P><STRONG><a name="[a9]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[6b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; CPU_Initialization &rArr; NVIC_Configuration &rArr; NVIC_Init
+<BR><BR>[Stack]<UL><LI>Max Depth = 76 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; Motor_Init &rArr; Motor_GPIO_Init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -555,8 +555,8 @@ Global Symbols
 </UL>
 <P><STRONG><a name="[b3]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
 
-<P><STRONG><a name="[75]"></a>CPU_Initialization</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, stm32f407vet_config.o(i.CPU_Initialization))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = CPU_Initialization &rArr; NVIC_Configuration &rArr; NVIC_Init
+<P><STRONG><a name="[75]"></a>CPU_Initialization</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, stm32f407vet_config.o(i.CPU_Initialization))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = CPU_Initialization &rArr; NVIC_Configuration &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_PriorityGroupConfig
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Configuration
@@ -621,7 +621,7 @@ Global Symbols
 <P><STRONG><a name="[3]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.NMI_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[77]"></a>NVIC_Configuration</STRONG> (Thumb, 174 bytes, Stack size 24 bytes, stm32f407vet_config.o(i.NVIC_Configuration))
+<P><STRONG><a name="[77]"></a>NVIC_Configuration</STRONG> (Thumb, 94 bytes, Stack size 24 bytes, stm32f407vet_config.o(i.NVIC_Configuration))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = NVIC_Configuration &rArr; NVIC_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
@@ -679,7 +679,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(.text)
 </UL>
-<P><STRONG><a name="[28]"></a>TIM2_IRQHandler</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, motor_process.o(i.TIM2_IRQHandler))
+<P><STRONG><a name="[28]"></a>TIM2_IRQHandler</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, motor_process.o(i.TIM2_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TIM2_IRQHandler &rArr; TIM_GetITStatus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
@@ -730,8 +730,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[6c]"></a>main</STRONG> (Thumb, 74 bytes, Stack size 24 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = main &rArr; CPU_Initialization &rArr; NVIC_Configuration &rArr; NVIC_Init
+<P><STRONG><a name="[6c]"></a>main</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = main &rArr; Motor_Init &rArr; Motor_GPIO_Init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Motor_Process
