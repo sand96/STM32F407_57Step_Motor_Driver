@@ -101,17 +101,18 @@ void TIM2_CH1_PWM_Config(u32 period)
 		//Setting for the compare and capture mode
 		//Channel 1 configurationin PWM mode
 		//It looks like we don't need to generate the output 
-/*	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; 
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Timing; 
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStructure.TIM_Pulse = Channel1Pluse;
-  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_Low;
+  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
   TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
   TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Set;
   TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCIdleState_Reset;
-  TIM_OC2Init(TIM4, &TIM_OCInitStructure); */
+  TIM_OC2Init(TIM2, &TIM_OCInitStructure); 
+  TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Disable);
 	
 
-	TIM_DMACmd(TIM2,TIM_DMA_CC1,DISABLE);
+	TIM_DMACmd(TIM2,TIM_DMA_CC1,DISABLE); //Enable the DMA request
 	TIM2 -> CCER &= ~(1<<1); //Disable CC1 for TIM2
 	TIM_Cmd(TIM2,DISABLE);
 }
