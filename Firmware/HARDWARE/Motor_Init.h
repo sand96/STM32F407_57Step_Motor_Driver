@@ -13,11 +13,14 @@
 #define PLUSE_HIGH	1
 #define PLUSE_LOW	0
 
+	//This will be used by TIM2_GPIO_Config function
 typedef struct
 {
 	//The input pin and output pin
 	//Each motor control driver needs two control signal
-	GPIO_TypeDef* Motor_Port;		//The port used by the Motor
+	GPIO_TypeDef* Motor_Direction_Port;		//The port used by the direction pin
+	GPIO_TypeDef* Motor_Pluse_Port;	//The port used by the pluse pin
+	GPIO_TypeDef* Motor_Input_Port;	//The port used by the input pin
 	unsigned char Direction_Pin; //Output pin
 	unsigned char Pluse_Pin;	//Output pin
 	unsigned char Control_Pin; //Input pin to control the communication between STM32 and central processor
@@ -34,15 +37,14 @@ typedef struct
 	//Variable for mode information
 	unsigned char Motor_Mode; //It can be forward, backward and stop.
 	unsigned char Motor_Mode_Old; //Store the odd information of Motor_Mode, you need to refresh the Old_Mode manually
-	unsigned char Motor_Timer; //Motor timer control, in order to conrtrol the pluse precisely
-	unsigned long int Timer_Delay; //Control the Motor_Timer changing speed 
-	unsigned long int Timer_Delay_Count; //The counter to store Timer_Delay
-
+	unsigned long int Timer_Period;//Motor timer control, in order to conrtrol the pluse precisely
+	unsigned long int Timer_Period_Final; //The final timer_period that should achieve
+	unsigned long int Channel_Pluse;//duty ration
 	Motor_GPIO Motor_GPIO;
 } Motor;
 
 void Motor_GPIO_Init(Motor_GPIO Motor_GPIO);	//Initialize the port
-void Pluse_Signal_Set(unsigned char Pluse_Mode,Motor_GPIO Motor_GPIO);		//control the pluse
+//void Pluse_Signal_Set(unsigned char Pluse_Mode,Motor_GPIO Motor_GPIO);		//control the pluse
 void Direction_Signal_Set(unsigned char Motor_Mode,Motor_GPIO Motor_GPIO); //Control the direction
 
 

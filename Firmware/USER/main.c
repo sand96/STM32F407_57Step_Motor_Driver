@@ -14,19 +14,19 @@ int main(void)
 {
 	  CPU_Initialization();
     delay_init(168);		  //???????//????
-	
 			//Here, you initialize the Test Motor
 			//The Test Motor is needed to be set in the Motor_Process.c
 			//However, you don't need to pass the value into the function call
-			Motor_Init(); 
+		Motor_Init(); 
+		TIM2_Config();
 	
 			Test_Motor.Motor_Mode = MOTOR_FORWARD;
 			Test_Motor.Motor_Mode_Old = MOTOR_FORWARD;
-			Test_flag_1_second = 0;
+		//	Test_flag_1_second = 0;
 	
 	
-	while(1)
-	{
+//	while(1)
+//	{
 			Motor_Process(Test_Motor);
 		//This part can last the motivation of the motor for several minutes 
 		//If you don't need the constant spiral, comment this part.
@@ -35,5 +35,5 @@ int main(void)
 				if(Test_flag_1_second == 100 )
 				{Test_Motor.Motor_Mode = MOTOR_STOP;}
 			}*/
-  } 
+ // } 
 }

@@ -3,9 +3,10 @@
 #include "stm32f4xx_gpio.h"
 #include "Motor_Process.h"
 #include "Motor_Init.h"
+#include "STM32F407VET_Config.h"
 
 Motor Test_Motor;
-long int Test_flag_1_second;
+//long int Test_flag_1_second;
 /*  brief:  This will initialze a motor including all the variabl 
             and port
     notes:  This is just a demo. Anyone wants to use it, you need to
@@ -35,12 +36,16 @@ void Motor_Init(void)
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
     Test_Motor.Motor_Mode_Old = MOTOR_STOP; //When initialzie, the old mode is also zero 
-		Test_Motor.Motor_Timer = 0; //This value can be 0 or 1. It doesen't matter 
-    Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
-    Test_Motor.Timer_Delay_Count = 0;
+		Test_Motor.Timer_Period = 20000; //This value can be 0 or 1. It doesen't matter 
+		Test_Motor.Timer_Period_Final = 1000; //This value can be 0 or 1. It doesen't matter
+		Test_Motor.Channel_Pluse = 500; //This value can be 0 or 1. It doesen't matter
+ //   Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
+ //   Test_Motor.Timer_Delay_Count = 0;
 		
 
-    Test_Motor.Motor_GPIO.Motor_Port = GPIOE;
+    Test_Motor.Motor_GPIO.Motor_Pluse_Port = GPIOA;
+    Test_Motor.Motor_GPIO.Motor_Direction_Port = GPIOE;
+    Test_Motor.Motor_GPIO.Motor_Input_Port = GPIOA;
     Test_Motor.Motor_GPIO.Direction_Pin = GPIO_Pin_0;
     Test_Motor.Motor_GPIO.Pluse_Pin = GPIO_Pin_1;
     Test_Motor.Motor_GPIO.Control_Pin = GPIO_Pin_2;
@@ -55,7 +60,12 @@ void  Motor_Process(Motor  Motor)
     {
         // Bar front Step Motor Direction is forward
         Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);     
-        if( (Motor.Motor_Timer% 2) == 1 )                                         
+				TIM2StartPwmOut();
+			while(Test_Motor.Motor_Mode != MOTOR_STOP)
+			{;} //Wait stop
+				TIM2StopPwmOut();
+				//now the motor want to slow down to stop 
+  /*      if( (Motor.Motor_Timer% 2) == 1 )                                         
         {
         // Bar front Step Motor Pulse ---- High Level
          Pluse_Signal_Set(PLUSE_HIGH,Motor.Motor_GPIO);  		
@@ -72,10 +82,10 @@ void  Motor_Process(Motor  Motor)
         if((Motor.Motor_GPIO.Motor_Port->IDR&=Test_Motor_Input) == 0)        
         {
             Motor.Motor_Mode = MOTOR_STOP;
-        }            
+        }          */   
      }  
         //If backward move
-   else if( Motor.Motor_Mode == MOTOR_BACKWARD )
+ /* else if( Motor.Motor_Mode == MOTOR_BACKWARD )
     {
          // Bar front Step Motor Direction is backward 
          Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);
@@ -150,10 +160,10 @@ void  Motor_Process(Motor  Motor)
                 Motor.Motor_Position = 0;
             }
         }
-		}
+		} 
 		else //Now, the speed is low, the motor can stop
 		{;}
-	}
+	} */
 }
 
 /* brief:   TIM2 Timer, this will update Motor_Timer according to TIM2 timer
@@ -186,76 +196,30 @@ void  Motor_Process(Motor  Motor)
                 NVIC_Init(&NVIC_InitStructure);
             }
 */
-void TIM2_IRQHandler(void)
+/*void TIM2_IRQHandler(void)
 {
-    //The intrrupt will happen every 500ms.
+    //The interrupt will happen every 500ms.
     //However, the length of interrupt isn't set here.
     //Look the above the explanation carefully. 
     if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET) //
     {
-    /*    if(Test_Motor.Timer_Delay_Count <= Test_Motor.Timer_Delay)
-        {
-            Test_Motor.Motor_Timer = 0;
-        }
-        else 
-        {
-            Test_Motor.Motor_Timer = 1;
-        } */
 			Test_Motor.Motor_Timer = ~Test_Motor.Motor_Timer;
     }
     TIM_ClearITPendingBit(TIM2,TIM_IT_Update);  //Reset TIM2 flag
-}
+}  */
 
-/* brief:   This is module control the acceleration ratio of the motor
-   notes；  The demo is totally same with the above demo 
+/* brief:		DMA interrupt handler. Each time will decrease the TImer_Period by 2.
 */
-void TIM3_IRQHandler(void)
+void DMA1_Stream5_IRQHandler(void)
 {
-    if(TIM_GetITStatus(TIM3,TIM_IT_Update)==SET) //
-    {
-            //The reason to double Timer Delay is avoid the TIM2 and TIM3
-            //changing to their maxmium at the same time.
-			if(Test_Motor.Motor_Mode != MOTOR_STOP)
-			{
-					if(Test_Motor.Timer_Delay_Count < 2 * Test_Motor.Timer_Delay)
-					{
-							Test_Motor.Timer_Delay_Count ++;
-					}
-					else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
-					{
-							Test_Motor.Timer_Delay_Count = 0;
-						if(Test_Motor.Timer_Delay > Test_Motor_Stop_Delay_MIN)
-						{
-							Test_Motor.Timer_Delay -= 1; //Shorten the interval between the acceleartion
-						}
-						else if(Test_Motor.Timer_Delay <= Test_Motor_Stop_Delay_MIN)
-						{
-							Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MIN;
-						}
-					} 
-			}
-			else 
-			{
-				if(Test_Motor.Timer_Delay_Count < 2 * Test_Motor.Timer_Delay)
-					{
-							Test_Motor.Timer_Delay_Count ++;
-					}
-					else if(Test_Motor.Timer_Delay_Count == 2 * Test_Motor.Timer_Delay)
-					{
-						Test_Motor.Timer_Delay_Count = 0;
-						if(Test_Motor.Timer_Delay < Test_Motor_Stop_Delay_MAX)
-						{
-							Test_Motor.Timer_Delay += 1; //Increase the interval between the acceleartion
-						}
-						else if(Test_Motor.Timer_Delay >= Test_Motor_Stop_Delay_MAX)
-						{
-							Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX;
-							Test_Motor.Motor_Mode_Old = MOTOR_STOP;
-						}
-					}
-			}
-    }
-    TIM_ClearITPendingBit(TIM3,TIM_IT_Update);  //Reset TIM3 flag
+	if(DMA_GetITStatus(DMA1_Stream5,DMA_IT_TCIF5)== SET)
+	{
+		if(Test_Motor.Timer_Period >Test_Motor.Timer_Period_Final)
+		{
+			Test_Motor.Timer_Period -= 1;
+			DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF5); //Clear interrupt flag
+		}
+	}
 }
 
 /* \brief	microsecond level delay
