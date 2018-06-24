@@ -160,16 +160,8 @@ void TIM2_CH1_PWM_Config(void)
 {		
 	TIM_DeInit(TIM2);								//Deinitializes the TIM2 peripheral registers to their default reset values.
 
-			
-			//The interrupt isn't needed
-//	TIM_ClearITPendingBit(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4|TIM_IT_Update); //Clear all the interrupt flag
-//	TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4|TIM_IT_Update, ENABLE);	//Configure the interrupt
-	
-//	TIM_DMACmd(TIM2,TIM_DMA_CC1,DISABLE); //Enable the DMA request
- 
-
-TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
-TIM_OCInitTypeDef  TIM_OCInitStructure;
+	TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+	TIM_OCInitTypeDef  TIM_OCInitStructure;
   /* Time base configuration */
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
   TIM_TimeBaseStructure.TIM_Period = Test_Motor.Timer_Period;
@@ -195,7 +187,10 @@ TIM_OCInitTypeDef  TIM_OCInitStructure;
 }
 
 
-/*
+/* brief:		This function has set the paramter for DMA
+	 notes:		All the setting should be changed according to the data sheet. 
+						In this demo, the function use TIM2_CH1. Here, DMA1_stream5 and channel
+						2 has been used.
 */
 void TIM2_PWMDMA_Config(void)
 {

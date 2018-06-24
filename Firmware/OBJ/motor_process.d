@@ -38,3 +38,5 @@
 ..\obj\motor_process.o: Motor_Process.h
 ..\obj\motor_process.o: ..\HARDWARE\Motor_Init.h
 ..\obj\motor_process.o: STM32F407VET_Config.h
+..\obj\motor_process.o: ..\SYSTEM\delay\delay.h
+..\obj\motor_process.o: ..\SYSTEM\sys\sys.h

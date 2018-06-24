@@ -34,6 +34,7 @@
 #include "delay.h"
 #include "Motor_Process.h"
 
+
 /** @addtogroup Template_Project
   * @{
   */
@@ -154,8 +155,6 @@ void PendSV_Handler(void)
 
 void SysTick_Handler(void)
 {
-//	if(Test_Motor.Timer_Delay == Test_Motor_Stop_Delay_MIN)
-//	{Test_flag_1_second += 1;}
 }
 
 

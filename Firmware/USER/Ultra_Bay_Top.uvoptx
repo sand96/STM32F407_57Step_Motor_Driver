@@ -152,9 +152,25 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>221</LineNumber>
+          <LineNumber>165</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134218620</Address>
+          <Address>134220768</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\stm32f4xx_it.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Ultra_Bay_Top\stm32f4xx_it.c\165</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>71</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134220136</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -163,7 +179,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>.\Motor_Process.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\Ultra_Bay_Top\Motor_Process.c\221</Expression>
+          <Expression>\\Ultra_Bay_Top\Motor_Process.c\71</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>203</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134222814</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\Motor_Process.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Ultra_Bay_Top\Motor_Process.c\203</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -181,6 +213,16 @@
           <count>2</count>
           <WinNumber>1</WinNumber>
           <ItemText>GPIOA</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>delay_test1</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>delay_test2</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -326,7 +368,7 @@
 
   <Group>
     <GroupName>SYSTEM</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

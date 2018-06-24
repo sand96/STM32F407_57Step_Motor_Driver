@@ -39,6 +39,7 @@ typedef struct
 	unsigned char Motor_Mode_Old; //Store the odd information of Motor_Mode, you need to refresh the Old_Mode manually
 	unsigned long int Timer_Period;//Motor timer control, in order to conrtrol the pluse precisely
 	unsigned long int Timer_Period_Final; //The final timer_period that should achieve
+	unsigned long int Timer_Period_Init; 
 	unsigned long int Channel_Pluse;//duty ration
 	Motor_GPIO Motor_GPIO;
 } Motor;
