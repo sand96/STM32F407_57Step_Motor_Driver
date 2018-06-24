@@ -36,18 +36,18 @@ void Motor_Init(void)
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
     Test_Motor.Motor_Mode_Old = MOTOR_STOP; //When initialzie, the old mode is also zero 
-		Test_Motor.Timer_Period = 20000; //This value can be 0 or 1. It doesen't matter 
-		Test_Motor.Timer_Period_Final = 1000; //This value can be 0 or 1. It doesen't matter
-		Test_Motor.Channel_Pluse = 500; //This value can be 0 or 1. It doesen't matter
+		Test_Motor.Timer_Period = 665; //This value can be 0 or 1. It doesen't matter 
+		Test_Motor.Timer_Period_Final = 100000; //This value can be 0 or 1. It doesen't matter
+		Test_Motor.Channel_Pluse = 333; //This value can be 0 or 1. It doesen't matter
  //   Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
  //   Test_Motor.Timer_Delay_Count = 0;
 		
 
-    Test_Motor.Motor_GPIO.Motor_Pluse_Port = GPIOA;
+    Test_Motor.Motor_GPIO.Motor_Pluse_Port = GPIOC;
     Test_Motor.Motor_GPIO.Motor_Direction_Port = GPIOE;
     Test_Motor.Motor_GPIO.Motor_Input_Port = GPIOA;
     Test_Motor.Motor_GPIO.Direction_Pin = GPIO_Pin_0;
-    Test_Motor.Motor_GPIO.Pluse_Pin = GPIO_Pin_1;
+    Test_Motor.Motor_GPIO.Pluse_Pin = GPIO_Pin_6;
     Test_Motor.Motor_GPIO.Control_Pin = GPIO_Pin_2;
 
     //Initilize the GPIO port
@@ -60,10 +60,10 @@ void  Motor_Process(Motor  Motor)
     {
         // Bar front Step Motor Direction is forward
         Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);     
-				TIM2StartPwmOut();
-			while(Test_Motor.Motor_Mode != MOTOR_STOP)
-			{;} //Wait stop
-				TIM2StopPwmOut();
+	//			TIM2StartPwmOut();
+				while(Test_Motor.Motor_Mode != MOTOR_STOP)
+				{;} //Wait stop
+	//			TIM2StopPwmOut();
 				//now the motor want to slow down to stop 
   /*      if( (Motor.Motor_Timer% 2) == 1 )                                         
         {
@@ -217,8 +217,8 @@ void DMA1_Stream5_IRQHandler(void)
 		if(Test_Motor.Timer_Period >Test_Motor.Timer_Period_Final)
 		{
 			Test_Motor.Timer_Period -= 1;
-			DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF5); //Clear interrupt flag
 		}
+			DMA_ClearITPendingBit(DMA1_Stream5,DMA_IT_TCIF5); //Clear interrupt flag
 	}
 }
 
