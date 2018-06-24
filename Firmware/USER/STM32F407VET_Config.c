@@ -35,11 +35,11 @@ void TIM2_Config(void)
 */
 void TIM2StartPwmOut(void)
 {
- // TIM_DMACmd(TIM2,TIM_DMA_CC1,ENABLE);
-//  TIM2->CCER |= 1<<1; 									//Enable CC1 for TIM2
-//  TIM_Cmd(TIM2,ENABLE);									//Enable TIM
- // DMA_Cmd(DMA1_Stream5,ENABLE);					//Enable DMA 
-	//DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,ENABLE);
+//  TIM_DMACmd(TIM2,TIM_DMA_CC2,ENABLE);
+  TIM2->CCER |= 1<<1; 									//Enable CC1 for TIM2
+  TIM_Cmd(TIM2,ENABLE);									//Enable TIM
+//  DMA_Cmd(DMA1_Stream5,ENABLE);					//Enable DMA 
+//	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,ENABLE);
 }
 
 /* brief:	Stop the PWM output
@@ -63,9 +63,7 @@ void TIM2StopPwmOut(void)
 */
 void TIM2_GPIO_Config(void)
 {
-		GPIO_InitTypeDef      GPIO_InitStructure;
-	//	GPIO_InitTypeDef Motor_GPIO_Struct;
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);
+	GPIO_InitTypeDef      GPIO_InitStructure;
 		//Initialize the clock for Motor_GPIO
 	if(Test_Motor.Motor_GPIO.Motor_Pluse_Port == GPIOA) 
 	{
@@ -111,58 +109,89 @@ void TIM2_GPIO_Config(void)
 	{
 		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOK,ENABLE);
 	}
-	
-	GPIO_InitStructure.GPIO_Pin = Test_Motor.Motor_GPIO.Pluse_Pin;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(Test_Motor.Motor_GPIO.Motor_Pluse_Port,&GPIO_InitStructure);
-	
-	GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,Test_Motor.Motor_GPIO.Pluse_Pin,GPIO_AF_TIM3);  //Remap the Motor_GPIO.Pluse_Pin
+	 
+  /* GPIOC Configuration: TIM3 CH1 (PC6), TIM3 CH2 (PC7), TIM3 CH3 (PC8) and TIM3 CH4 (PC9) */
+  GPIO_InitStructure.GPIO_Pin = Test_Motor.Motor_GPIO.Pluse_Pin;// | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
+  GPIO_Init(Test_Motor.Motor_GPIO.Motor_Pluse_Port, &GPIO_InitStructure); 
+
+  /* Connect TIM2 pins to AF3 */  
+	if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_0)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource0, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_1)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource1, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_2)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource2, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_3)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource3, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_4)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource4, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_5)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource5, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_6)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource6, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_7)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource7, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_8)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource8, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_9)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource9, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_10)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource10, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_11)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource11, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_12)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource12, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_13)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource13, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_14)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource14, GPIO_AF_TIM2);
+	else if(Test_Motor.Motor_GPIO.Pluse_Pin == GPIO_Pin_15)
+		GPIO_PinAFConfig(Test_Motor.Motor_GPIO.Motor_Pluse_Port,GPIO_PinSource15, GPIO_AF_TIM2);
 }
 
 
 /* brief:	Congfigure the setting for TIM2 Channel 1
 */
 void TIM2_CH1_PWM_Config(void)
-{	
-	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;		//The sturcture to define the performance of TIM2
-	TIM_OCInitTypeDef	TIM_OCInitStructure;	//The structure to define the capture and the compare mode
-	
-//	TIM_DeInit(TIM2);								//Deinitializes the TIM2 peripheral registers to their default reset values.
-//	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  //Enable the clock for the TIM2
-	
-		//Setting for the TIM2
-  TIM_TimeBaseInitStructure.TIM_Period = Test_Motor.Timer_Period; 	//The automatic reload value
-	TIM_TimeBaseInitStructure.TIM_Prescaler=3;  //No prescaler the frequency is equal 168MHz / 4
-	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up; //Using up count mode
-	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1; 	//Just setting for filtering
-	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0x0000; //No repetition counting
-	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStructure);//Initizlize the TIM2 timer
-	
-		//Setting for the compare and capture mode
-		//Channel 1 configurationin PWM mode
-		//It looks like we don't need to generate the output 
-	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; 
-	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-//  TIM_OCInitStructure.TIM_OutputNState = TIM_OutputNState_Enable;
-	TIM_OCInitStructure.TIM_Pulse = Test_Motor.Channel_Pluse; //This value is RCC
-  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;//This will influnence the spiral direction
-//  TIM_OCInitStructure.TIM_OCNPolarity = TIM_OCNPolarity_High;
-//  TIM_OCInitStructure.TIM_OCIdleState = TIM_OCIdleState_Set;
-//  TIM_OCInitStructure.TIM_OCNIdleState = TIM_OCIdleState_Reset;
-  TIM_OC1Init(TIM3, &TIM_OCInitStructure); 
-  TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
+{		
+	TIM_DeInit(TIM2);								//Deinitializes the TIM2 peripheral registers to their default reset values.
+
 			
 			//The interrupt isn't needed
 //	TIM_ClearITPendingBit(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4|TIM_IT_Update); //Clear all the interrupt flag
 //	TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4|TIM_IT_Update, ENABLE);	//Configure the interrupt
 	
-//	TIM_DMACmd(TIM2,TIM_DMA_CC1,ENABLE); //Enable the DMA request
-//	TIM2 -> CCER |= (1<<1); //Disable CC1 for TIM2
-TIM_ARRPreloadConfig(TIM3, ENABLE);
-	TIM_Cmd(TIM3,ENABLE);
+//	TIM_DMACmd(TIM2,TIM_DMA_CC1,DISABLE); //Enable the DMA request
+ 
+
+TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
+TIM_OCInitTypeDef  TIM_OCInitStructure;
+  /* Time base configuration */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+  TIM_TimeBaseStructure.TIM_Period = Test_Motor.Timer_Period;
+  TIM_TimeBaseStructure.TIM_Prescaler = 0;
+  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+  /* PWM1 Mode configuration: Channel1 */
+  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+  TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+  TIM_OCInitStructure.TIM_Pulse = Test_Motor.Channel_Pluse;
+  TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
+
+  TIM_OC1Init(TIM2, &TIM_OCInitStructure);
+  TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
+  TIM_ARRPreloadConfig(TIM2, DISABLE);
+
+  /* TIM3 enable counter */
+  //TIM_Cmd(TIM2, ENABLE);
+	TIM2 -> CCER |= (1<<1); //Disable CC1 for TIM2
+ TIM_Cmd(TIM2,DISABLE);
 }
 
 

@@ -21,9 +21,9 @@ typedef struct
 	GPIO_TypeDef* Motor_Direction_Port;		//The port used by the direction pin
 	GPIO_TypeDef* Motor_Pluse_Port;	//The port used by the pluse pin
 	GPIO_TypeDef* Motor_Input_Port;	//The port used by the input pin
-	unsigned char Direction_Pin; //Output pin
-	unsigned char Pluse_Pin;	//Output pin
-	unsigned char Control_Pin; //Input pin to control the communication between STM32 and central processor
+	uint16_t Direction_Pin; //Output pin
+	uint16_t Pluse_Pin;	//Output pin
+	uint16_t Control_Pin; //Input pin to control the communication between STM32 and central processor
 } Motor_GPIO;
 
 	//Define a structue for motor process

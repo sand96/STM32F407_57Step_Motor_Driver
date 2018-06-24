@@ -43,11 +43,11 @@ void Motor_Init(void)
  //   Test_Motor.Timer_Delay_Count = 0;
 		
 
-    Test_Motor.Motor_GPIO.Motor_Pluse_Port = GPIOC;
+    Test_Motor.Motor_GPIO.Motor_Pluse_Port = GPIOA;
     Test_Motor.Motor_GPIO.Motor_Direction_Port = GPIOE;
     Test_Motor.Motor_GPIO.Motor_Input_Port = GPIOA;
     Test_Motor.Motor_GPIO.Direction_Pin = GPIO_Pin_0;
-    Test_Motor.Motor_GPIO.Pluse_Pin = GPIO_Pin_6;
+    Test_Motor.Motor_GPIO.Pluse_Pin = GPIO_Pin_0;
     Test_Motor.Motor_GPIO.Control_Pin = GPIO_Pin_2;
 
     //Initilize the GPIO port
@@ -60,7 +60,7 @@ void  Motor_Process(Motor  Motor)
     {
         // Bar front Step Motor Direction is forward
         Direction_Signal_Set(Motor.Motor_Mode,Motor.Motor_GPIO);     
-	//			TIM2StartPwmOut();
+				TIM2StartPwmOut();
 				while(Test_Motor.Motor_Mode != MOTOR_STOP)
 				{;} //Wait stop
 	//			TIM2StopPwmOut();
