@@ -36,9 +36,9 @@ void Motor_Init(void)
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
     Test_Motor.Motor_Mode_Old = MOTOR_STOP; //When initialzie, the old mode is also zero 
-		Test_Motor.Timer_Period = 665; //This value can be 0 or 1. It doesen't matter 
-		Test_Motor.Timer_Period_Final = 100000; //This value can be 0 or 1. It doesen't matter
-		Test_Motor.Channel_Pluse = 333; //This value can be 0 or 1. It doesen't matter
+		Test_Motor.Timer_Period = 20000; //This value can be 0 or 1. It doesen't matter 
+		Test_Motor.Timer_Period_Final = 1000; //This value can be 0 or 1. It doesen't matter
+		Test_Motor.Channel_Pluse = 500; //This value can be 0 or 1. It doesen't matter
  //   Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
  //   Test_Motor.Timer_Delay_Count = 0;
 		

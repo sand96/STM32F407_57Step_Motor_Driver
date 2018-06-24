@@ -25,7 +25,7 @@ void TIM2_Config(void)
 {
 	TIM2_GPIO_Config();
 	TIM2_CH1_PWM_Config();
-//	TIM2_PWMDMA_Config();
+	TIM2_PWMDMA_Config();
 	
 }
 
@@ -35,11 +35,11 @@ void TIM2_Config(void)
 */
 void TIM2StartPwmOut(void)
 {
-//  TIM_DMACmd(TIM2,TIM_DMA_CC2,ENABLE);
+  TIM_DMACmd(TIM2,TIM_DMA_CC1,ENABLE);
   TIM2->CCER |= 1<<1; 									//Enable CC1 for TIM2
   TIM_Cmd(TIM2,ENABLE);									//Enable TIM
-//  DMA_Cmd(DMA1_Stream5,ENABLE);					//Enable DMA 
-//	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,ENABLE);
+  DMA_Cmd(DMA1_Stream5,ENABLE);					//Enable DMA 
+	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,ENABLE);
 }
 
 /* brief:	Stop the PWM output
@@ -110,8 +110,8 @@ void TIM2_GPIO_Config(void)
 		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOK,ENABLE);
 	}
 	 
-  /* GPIOC Configuration: TIM3 CH1 (PC6), TIM3 CH2 (PC7), TIM3 CH3 (PC8) and TIM3 CH4 (PC9) */
-  GPIO_InitStructure.GPIO_Pin = Test_Motor.Motor_GPIO.Pluse_Pin;// | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
+  // GPIOC Configuration: TIM2 CH1 (PA0)
+  GPIO_InitStructure.GPIO_Pin = Test_Motor.Motor_GPIO.Pluse_Pin;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
@@ -191,7 +191,7 @@ TIM_OCInitTypeDef  TIM_OCInitStructure;
   /* TIM3 enable counter */
   //TIM_Cmd(TIM2, ENABLE);
 	TIM2 -> CCER |= (1<<1); //Disable CC1 for TIM2
- TIM_Cmd(TIM2,DISABLE);
+  TIM_Cmd(TIM2,DISABLE);
 }
 
 
