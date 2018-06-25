@@ -171,7 +171,7 @@ void TIM2_CH1_PWM_Config(void)
   TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
 
   /* PWM1 Mode configuration: Channel1 */
-  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+  TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_Toggle;
   TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCInitStructure.TIM_Pulse = Test_Motor.Channel_Pluse;
   TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
