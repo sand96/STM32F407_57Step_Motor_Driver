@@ -21,9 +21,11 @@ int main(void)
 			TIM2_Config();
 	
 				//Just for test 
-			Test_Motor.Motor_Mode = MOTOR_BACKWARD;
+			Test_Motor.Motor_Mode = MOTOR_FORWARD;
 			Test_Motor.Motor_Mode_Old = MOTOR_FORWARD;
-	
+	while(1){
 			Motor_Process(Test_Motor);
+			Motor_Process(Test_Motor);
+	}
 
 } 

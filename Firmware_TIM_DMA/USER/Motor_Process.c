@@ -36,9 +36,9 @@ void Motor_Init(void)
 
     Test_Motor.Motor_Mode = MOTOR_STOP; //When you want to test the motor, change here directly
     Test_Motor.Motor_Mode_Old = MOTOR_STOP; //When initialzie, the old mode is also zero 
-		Test_Motor.Timer_Period = 40000; 
+		Test_Motor.Timer_Period = 20000; 
 		Test_Motor.Timer_Period_Final = 3000; 
-		Test_Motor.Timer_Period_Init = 40000; 
+		Test_Motor.Timer_Period_Init = 20000; 
 		Test_Motor.Channel_Pluse = 1500; //This value can be 0 or 1. It doesen't matter
  //   Test_Motor.Timer_Delay = Test_Motor_Stop_Delay_MAX; //The bigger the delay is, the slower to increase the speed
  //   Test_Motor.Timer_Delay_Count = 0;
@@ -64,10 +64,14 @@ void  Motor_Process(Motor  Motor)
 				TIM2StartPwmOut();
 				while(Test_Motor.Motor_Mode != MOTOR_STOP)
 				{ 
-						//Disable the interrupt if achieve the highest frequency
 					if(Test_Motor.Timer_Period == Test_Motor.Timer_Period_Final)
-					{	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,DISABLE);;} 
-				;} //Wait stop
+					{
+						//just for test
+						delay_ms(250000);
+						Test_Motor.Motor_Mode = MOTOR_STOP;
+						Test_Motor.Motor_Mode_Old = MOTOR_FORWARD;
+					}
+				} //Wait stop
 				
 					//Just for test
 		/*		delay_ms(100000);
@@ -88,9 +92,11 @@ void  Motor_Process(Motor  Motor)
 				TIM2StartPwmOut();
 				while(Test_Motor.Motor_Mode != MOTOR_STOP)
 				{ 
-				if(Test_Motor.Timer_Period == Test_Motor.Timer_Period_Final)
-					{	DMA_ITConfig(DMA1_Stream5,DMA_IT_TC,DISABLE);} 
-				;} //Wait stop
+					if(Test_Motor.Timer_Period == Test_Motor.Timer_Period_Final)
+					{
+						
+					}
+				} //Wait stop
      }
 	else if(Motor.Motor_Mode == MOTOR_STOP)
 		{
@@ -98,6 +104,10 @@ void  Motor_Process(Motor  Motor)
 			while(Test_Motor.Timer_Period < Test_Motor.Timer_Period_Init)
 			{;}
 			TIM2StopPwmOut();
+				//just for test
+				Test_Motor.Motor_Mode = MOTOR_FORWARD;
+				Test_Motor.Motor_Mode_Old = MOTOR_STOP;
+				delay_ms(250000);
 		}
 }
 
@@ -145,3 +155,5 @@ void delay_ms(unsigned int x)
 		for(bbb=0;bbb<1000;bbb++);
 	}
 }
+
+

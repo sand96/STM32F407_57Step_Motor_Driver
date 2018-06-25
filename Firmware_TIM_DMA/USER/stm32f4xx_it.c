@@ -34,7 +34,7 @@
 #include "delay.h"
 #include "Motor_Process.h"
 
-
+extern Motor Test_Motor;
 /** @addtogroup Template_Project
   * @{
   */
@@ -155,6 +155,29 @@ void PendSV_Handler(void)
 
 void SysTick_Handler(void)
 {
+	/*
+	//just for test
+	if(Test_Motor.Motor_Mode == MOTOR_STOP)
+	{
+
+	}
+	else if(Test_Motor.Motor_Mode == MOTOR_FORWARD)
+	{
+		if(Test_Motor.Timer_Period == Test_Motor.Timer_Period_Final)
+		{	
+			Test_Motor.Motor_Mode = MOTOR_STOP;
+//			Test_Motor.Timer_Period = Test_Motor.Timer_Period_Init ;
+		}
+	}
+	else if(Test_Motor.Motor_Mode == MOTOR_BACKWARD)
+	{
+		if(Test_Motor.Timer_Period == Test_Motor.Timer_Period_Final)
+		{	
+			Test_Motor.Motor_Mode = MOTOR_STOP;
+	//		Test_Motor.Timer_Period = Test_Motor.Timer_Period_Init ;
+		}
+	}
+	*/
 }
 
 

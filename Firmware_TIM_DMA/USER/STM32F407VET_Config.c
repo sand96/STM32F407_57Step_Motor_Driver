@@ -15,6 +15,8 @@ static void TIM2_PWMDMA_Config(void); //DMA and interrupt configure
 void CPU_Initialization(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//Set priority groups
+		//Just for test
+	//	SysTick_Config(SystemCoreClock / 50000);
 }
 
 /* breif:		This function is used to calculate the period 
